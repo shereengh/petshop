@@ -1,0 +1,40 @@
+img {
+	width:100%;
+	height:300px;
+}
+#ch{
+	width:100%;
+	height:800px;
+}
+.this{
+width: 100%
+}
+body{
+	background-color: #F6F8FE;
+	
+	   background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+}
+#imgh{
+	  background-image: url("pett.png");
+	  min-height: 250px;
+
+  /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+  /* Needed to position the navbar */
+      position: relative;
+	}
+.header{
+  position: absolute;
+  margin: 10px;
+  width: auto;
+}
+.card{
+	margin-bottom: 20px;
+}
+
+
