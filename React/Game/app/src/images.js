@@ -11,7 +11,6 @@ import F from "./img/F.png";
 import L from "./img/L.png";
 import I from "./img/I.png";
 import X from "./img/X.png";
-import img2 from "./img/dash.png";
 import win from "./img/win.png";
 import R from "./img/R.png";
 import A from "./img/A.png";
@@ -21,7 +20,18 @@ import P from "./img/P.png";
 import U from "./img/U.png";
 import J from "./img/J.png";
 import W from "./img/W.png";
-import K from "./img/J.png";
+import K from "./img/K.png";
+import S from "./img/S.png";
+import Q from "./img/Q.png";
+import dash from "./img/empty.png";
+import B from "./img/B.png";
+import D from "./img/D.png";
+import G from "./img/G.png";
+import H from "./img/H.png";
+import O from "./img/O.png";
+import V from "./img/V.png";
+import Y from "./img/Y.png";
+import Z from "./img/Z.png";
 
 const images = {
   "5": first,
@@ -31,23 +41,32 @@ const images = {
   "1": fifth,
   "0": lose,
   win: win,
-  N: N,
-  E: E,
-  T: T,
-  F: F,
-  L: L,
-  I: I,
-  X: X,
-  R: R,
   A: A,
+  B: B,
   C: C,
-  M: M,
-  P: P,
-  U: U,
+  D: D,
+  E: E,
+  F: F,
+  G: G,
+  H: H,
+  I: I,
   J: J,
-  W: W,
   K: K,
-
-  none: img2
+  L: L,
+  M: M,
+  N: N,
+  O: O,
+  P: P,
+  Q: Q,
+  R: R,
+  S: S,
+  T: T,
+  U: U,
+  V: V,
+  W: W,
+  X: X,
+  Y: Y,
+  Z: Z,
+  dash: dash
 };
 export default images;

@@ -1,3 +1,3 @@
-const words = ["REACT"]; //, "COMPUTER", "PROJECT"];
+const words = ["REACT", "JUMPS", "RUSTY", "PLAYS"];
 
 export default words;

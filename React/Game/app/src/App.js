@@ -1,127 +1,91 @@
 import React, { Component } from "react";
-import img1 from "./img/1.png";
 import "./App.css";
 import words from "./data";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Button from "react-bootstrap/Button";
 import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import images from "./images";
 import arrow from "./img/arrow.png";
+import play from "./img/play.png";
 
 let randomize = () => {
   let randIndex = Math.floor(Math.random() * words.length);
-  let ar = words[randIndex].split("");
+  let ar = words[randIndex];
   console.log("rand" + randIndex);
   return ar;
 };
 
 class App extends Component {
   state = {
-    letter: "none",
-    letter2: "none",
-    letter3: "none",
-    letter4: "none",
-    letter5: "none",
-    letter6: "none",
-    letter7: "none",
     chances: 5,
     guessed: 0,
     status: "begin",
-    array: randomize(),
-    word: []
+    gWord: randomize(),
+    array: [],
+    wordArray: []
   };
-
+  dashes() {
+    let a = this.state.gWord.length;
+    let temp = this.state.array;
+    for (let i = 0; i < a; i++) {
+      temp.push(images["dash"]);
+    }
+    let temp2 = this.state.gWord;
+    let arrayT = temp2.split("");
+    this.setState({
+      array: temp,
+      status: "playing",
+      wordArray: arrayT
+    });
+  }
   selectLetter(letter) {
-    this.setState({ status: "playing" });
-    if (this.state.array[0] == "R") {
-      if (letter === "R") {
+    let ind = this.state.wordArray.findIndex(lett => {
+      return lett === letter;
+    });
+    if (ind !== -1) {
+      let temp = this.state.array;
+      temp.fill(images[letter], ind, ind + 1);
+      if (this.state.guessed === this.state.gWord.length - 1) {
         this.setState({
-          word: "R"
+          array: temp,
+          status: "win"
         });
-        if (this.state.guessed === 4) {
-          this.setState({
-            letter: letter,
-            status: "win"
-          });
-        } else {
-          const newG = this.state.guessed + 1;
-          this.setState({
-            letter: letter,
-            guessed: newG
-          });
-        }
-      } else if (letter === "E") {
-        //Display letter
-        if (this.state.guessed === 4) {
-          this.setState({
-            status: "win",
-            letter2: letter
-          });
-        } else {
-          const newG = this.state.guessed + 1;
-          this.setState({
-            letter2: letter,
-            guessed: newG
-          });
-        }
-      } else if (letter === "A") {
-        //Display letter
-        if (this.state.guessed === 4) {
-          this.setState({
-            letter3: letter,
-            status: "win"
-          });
-        } else {
-          const newG = this.state.guessed + 1;
-          this.setState({
-            letter3: letter,
-            guessed: newG
-          });
-        }
-      } else if (letter === "C") {
-        //Display letter
-        if (this.state.guessed === 4) {
-          this.setState({
-            letter4: letter,
-            status: "win"
-          });
-        } else {
-          const newG = this.state.guessed + 1;
-          this.setState({
-            letter4: letter,
-            guessed: newG
-          });
-        }
-      } else if (letter === "T") {
-        //Display letter
-        if (this.state.guessed === 4) {
-          this.setState({
-            letter5: letter,
-            status: "win"
-          });
-        } else {
-          const newG = this.state.guessed + 1;
-          this.setState({
-            letter5: letter,
-            guessed: newG
-          });
-        }
       } else {
-        if (this.state.chances === 0) {
-          this.setState({
-            status: "lose"
-          });
-        } else {
-          const newC = this.state.chances - 1;
-          this.setState({
-            chances: newC
-          });
-        }
+        const newG = this.state.guessed + 1;
+        this.setState({
+          array: temp,
+          guessed: newG
+        });
+      }
+      console.log(temp);
+    } else {
+      const newC = this.state.chances - 1;
+      this.setState({
+        chances: newC
+      });
+      if (this.state.chances === 0) {
+        this.setState({
+          status: "lose"
+        });
       }
     }
   }
   getElements() {
-    if (this.state.status === "begin" || this.state.status === "playing") {
+    if (this.state.status === "begin") {
+      let image = images[0];
+      return (
+        <div>
+          <img className="hang" src={image} alt="image" />
+          <center>
+            <img
+              className="dash"
+              src={play}
+              alt="image"
+              onClick={() => this.dashes()}
+            />
+          </center>
+        </div>
+      );
+    } else if (this.state.status === "playing") {
       let letters = [
         "A",
         "B",
@@ -152,11 +116,15 @@ class App extends Component {
       ];
 
       let image = images[this.state.chances];
-      let image2 = images[this.state.letter];
-      let image3 = images[this.state.letter2];
-      let image4 = images[this.state.letter3];
-      let image5 = images[this.state.letter4];
-      let image6 = images[this.state.letter5];
+
+      let temp = this.state.array;
+      // props.authors.map(author => <AuthorCard author={author} />);
+      //let displayArray = temp.map(letters);
+      let image2 = temp[0];
+      let image3 = temp[1];
+      let image4 = temp[2];
+      let image5 = temp[3];
+      let image6 = temp[4];
       let letterBoxes = letters.map(letter => {
         return (
           <button onClick={() => this.selectLetter(letter)}>{letter}</button>
@@ -182,7 +150,7 @@ class App extends Component {
         </div>
       );
     } else if (this.state.status === "lose") {
-      let image = images[this.state.chances];
+      let image = images[0];
       return (
         <div>
           <img className="hang" src={image} alt="image" />
@@ -193,17 +161,12 @@ class App extends Component {
             alt="image"
             onClick={() =>
               this.setState({
-                status: "begin",
-                letter: "none",
-                letter2: "none",
-                letter3: "none",
-                letter4: "none",
-                letter5: "none",
-                letter6: "none",
-                letter7: "none",
                 chances: 5,
                 guessed: 0,
-                array: randomize()
+                status: "begin",
+                gWord: randomize(),
+                array: [],
+                wordArray: []
               })
             }
           />
@@ -221,17 +184,12 @@ class App extends Component {
             alt="image"
             onClick={() =>
               this.setState({
-                status: "begin",
-                letter: "none",
-                letter2: "none",
-                letter3: "none",
-                letter4: "none",
-                letter5: "none",
-                letter6: "none",
-                letter7: "none",
                 chances: 5,
                 guessed: 0,
-                array: randomize()
+                status: "begin",
+                gWord: randomize(),
+                array: [],
+                wordArray: []
               })
             }
           />
