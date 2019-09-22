@@ -12,6 +12,17 @@ import L from "./img/L.png";
 import I from "./img/I.png";
 import X from "./img/X.png";
 import img2 from "./img/dash.png";
+import win from "./img/win.png";
+import R from "./img/R.png";
+import A from "./img/A.png";
+import C from "./img/C.png";
+import M from "./img/M.png";
+import P from "./img/P.png";
+import U from "./img/U.png";
+import J from "./img/J.png";
+import W from "./img/W.png";
+import K from "./img/J.png";
+
 const images = {
   "5": first,
   "4": second,
@@ -19,6 +30,7 @@ const images = {
   "2": fourth,
   "1": fifth,
   "0": lose,
+  win: win,
   N: N,
   E: E,
   T: T,
@@ -26,6 +38,16 @@ const images = {
   L: L,
   I: I,
   X: X,
+  R: R,
+  A: A,
+  C: C,
+  M: M,
+  P: P,
+  U: U,
+  J: J,
+  W: W,
+  K: K,
+
   none: img2
 };
 export default images;
